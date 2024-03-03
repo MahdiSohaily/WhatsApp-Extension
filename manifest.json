@@ -1,24 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "Color Changer",
-    "version": "1.0",
-    "description": "Change the background color of the current webpage.",
-    "permissions": ["activeTab"],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
-      }
-    },
-    "icons": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    },
-    "background": {
-      "service_worker": "background.js"
+  "manifest_version": 2,
+  "name": "WhatsApp Message Filler",
+  "version": "1.0",
+  "description": "Fill WhatsApp message box with predefined messages",
+  "permissions": ["activeTab"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "css": ["content.css"]
     }
-  }
-  
+  ]
+}

@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Changer</title>
-  <style>
-    body {
-      width: 150px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-  </style>
+  <title>WhatsApp Message Filler</title>
+  <script src="popup.js"></script>
 </head>
 <body>
-  <button id="changeColor">Change Color</button>
-
-  <script src="popup.js"></script>
+  <h2>Select a message:</h2>
+  <select id="messageSelect">
+    <option value="Hello, how are you?">Hello, how are you?</option>
+    <option value="I'll be late today.">I'll be late today.</option>
+    <option value="Can you please call me?">Can you please call me?</option>
+    <!-- Add more predefined messages here -->
+  </select>
+  <button id="fillButton">Fill Message</button>
 </body>
 </html>
