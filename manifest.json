@@ -3,13 +3,13 @@
     "version": "0.1.0",
     "description": "این افزونه به منظور ساده سازی ارسال گروهی از پیام های از پیش تعریف شده برای مشتریان طراحی شده است.",
     "permissions": ["storage", "tabs"],
-    "host_permissions": ["https://*.youtube.com/*"],
+    "host_permissions": ["https://*.whatsapp.com/*"],
     "background": {
       "service_worker": "background.js"
     },
     "content_scripts": [
       {
-        "matches": ["https://*.youtube.com/*"],
+        "matches": ["https://*.whatsapp.com/*"],
         "js": ["contentScript.js"]
       }
     ],
@@ -21,7 +21,7 @@
           "assets/delete.png",
           "assets/save.png"
         ],
-        "matches": ["https://*.youtube.com/*"]
+        "matches": ["https://*.whatsapp.com/*"]
       }
     ],
     "action": {

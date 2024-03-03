@@ -1,55 +1,62 @@
 (() => {
-    let youtubeLeftControls, youtubePlayer;
-    let currentVideo = "";
-    let currentVideoBookmarks = [];
+  let youtubeLeftControls, youtubePlayer;
+  let currentVideo = "";
+  let currentVideoBookmarks = [];
 
-    chrome.runtime.onMessage.addListener((obj, sender, response) => {
-        const { type, value, videoId } = obj;
+  chrome.runtime.onMessage.addListener((obj, sender, response) => {
+    const { type, value, videoId } = obj;
 
-        if (type === "NEW") {
-            currentVideo = videoId;
-            newVideoLoaded();
-        }
-    });
+    if (type === "NEW") {
+      currentVideo = videoId;
+      //   newVideoLoaded();
+    }
+  });
 
-    const newVideoLoaded = () => {
-        const bookmarkBtnExists = document.getElementsByClassName("bookmark-btn")[0];
-        console.log(bookmarkBtnExists);
+  const newVideoLoaded = (e) => {
+    const sideElement = document.getElementById("side");
 
-        if (!bookmarkBtnExists) {
-            const bookmarkBtn = document.createElement("img");
+    // Check if e.target is a child of the element with id "pane-side"
+    if (sideElement && sideElement.contains(e.target)) {
+      const template = document.createElement("div");
+      template.innerHTML = `
+        <div style="background-color:white;
+          padding: 10px;
+          border-radius: 10px;
+          width:300px;
+          z-index:100000000000000000000000;">
+          <ul>
+              <li data-message="hello" onclick="addNewBookmarkEventHandler()" style="padding:5px; color:gray">سلام</li>
+              <li data-message="hello" onclick="addNewBookmarkEventHandler()" style="padding:5px; color:gray">خداحافظ</li>
+              <li data-message="hello" onclick="addNewBookmarkEventHandler()" style="padding:5px; color:gray">ارسال شد</li>
+              <li data-message="hello" onclick="addNewBookmarkEventHandler()" style="padding:5px; color:gray">چشم حتمی</li>
+              <li data-message="hello" onclick="addNewBookmarkEventHandler()" style="padding:5px; color:gray">باشه</li>
+          </ul>
+        </div>
+      `;
+      const bookmarkBtn = template;
 
-            bookmarkBtn.src = chrome.runtime.getURL("assets/bookmark.png");
-            bookmarkBtn.className = "ytp-button " + "bookmark-btn";
-            bookmarkBtn.title = "Click to bookmark current timestamp";
-
-            youtubeLeftControls = document.getElementsByClassName("ytp-left-controls")[0];
-            youtubePlayer = document.getElementsByClassName("video-stream")[0];
-            
-            youtubeLeftControls.append(bookmarkBtn);
-            bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
-        }
+      youtubeLeftControls = document.getElementById("main");
+      youtubeLeftControls.append(template);
+      bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
     }
 
-    const addNewBookmarkEventHandler = () => {
-        const currentTime = youtubePlayer.currentTime;
-        const newBookmark = {
-            time: currentTime,
-            desc: "Bookmark at " + getTime(currentTime),
-        };
-        console.log(newBookmark);
+    const father =  document.getElementsByClassName("lexical-rich-text-input")[1];
+    console.log(father.querySelector("span.selectable-text"));
 
-        chrome.storage.sync.set({
-            [currentVideo]: JSON.stringify([...currentVideoBookmarks, newBookmark].sort((a, b) => a.time - b.time))
-        });
+    if (e.target.getAttribute("data-message")) {
+      alert(e.target.getAttribute("data-message"));
     }
+  };
 
-    newVideoLoaded();
+  document.body.addEventListener("click", newVideoLoaded, true);
+
+  const addNewBookmarkEventHandler = () => {
+    alert("Bookmark added");
+  };
 })();
+const getTime = (t) => {
+  var date = new Date(0);
+  date.setSeconds(1);
 
-const getTime = t => {
-    var date = new Date(0);
-    date.setSeconds(1);
-
-    return date.toISOString().substr(11, 0);
-}
+  return date.toISOString().substr(11, 0);
+};
