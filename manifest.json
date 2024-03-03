@@ -1,7 +1,7 @@
 {
-    "name": "My YT Bookmarks",
+    "name": "افزونه واتساپ یدک شاپ",
     "version": "0.1.0",
-    "description": "Saving timestamps in YT videos",
+    "description": "این افزونه به منظور ساده سازی ارسال گروهی از پیام های از پیش تعریف شده برای مشتریان طراحی شده است.",
     "permissions": ["storage", "tabs"],
     "host_permissions": ["https://*.youtube.com/*"],
     "background": {
