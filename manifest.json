@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "WhatsApp Predefined Messages",
-  "description": "Send predefined messages on WhatsApp",
+  "name": "افزونه واتساپ یدک شاپ",
+  "description": "این افزپنه جهت ارسال پیام های از قبل تعریف شده برای سرعت بیشتر ارتباطات می باشد.",
   "version": "1.0",
   "permissions": ["activeTab"],
   "action": {
