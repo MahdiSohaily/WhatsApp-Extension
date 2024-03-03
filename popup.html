@@ -1,10 +1,27 @@
-<link href="popup.css" rel="stylesheet" type="text/css" />
-<script type="module" src="popup.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WhatsApp Predefined Messages</title>
+  <style>
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button id="message1">Hello!</button>
+  <button id="message2">How are you?</button>
+  <button id="message3">See you later!</button>
 
-<div class="container">
-  <div>
-    <div class="title">Your bookmarks for this video</div>
+  <select id="customMessage">
+    <option value="">Custom Message</option>
+    <option value="Custom message 1">Custom message 1</option>
+    <option value="Custom message 2">Custom message 2</option>
+    <!-- Add more custom message options as needed -->
+  </select>
 
-    <div class="bookmarks" id="bookmarks"></div>
-  </div>
-</div>
+  <button id="sendButton">Send Message</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

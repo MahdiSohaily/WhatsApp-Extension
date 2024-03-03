@@ -1,37 +1,26 @@
 {
-    "name": "افزونه واتساپ یدک شاپ",
-    "version": "0.1.0",
-    "description": "این افزونه به منظور ساده سازی ارسال گروهی از پیام های از پیش تعریف شده برای مشتریان طراحی شده است.",
-    "permissions": ["storage", "tabs"],
-    "host_permissions": ["https://*.whatsapp.com/*"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": ["https://*.whatsapp.com/*"],
-        "js": ["contentScript.js"]
-      }
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png"
-        ],
-        "matches": ["https://*.whatsapp.com/*"]
-      }
-    ],
-    "action": {
-      "default_icon": {
-        "16": "assets/ext-icon.png",
-        "24": "assets/ext-icon.png",
-        "32": "assets/ext-icon.png"
-      },
-      "default_title": "My YT Bookmarks",
-      "default_popup": "popup.html"
-    },
-    "manifest_version": 3
+  "manifest_version": 3,
+  "name": "WhatsApp Predefined Messages",
+  "description": "Send predefined messages on WhatsApp",
+  "version": "1.0",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/bookmark.png",
+      "48": "assets/bookmark.png",
+      "128": "assets/bookmark.png"
+    }
+  },
+  "icons": {
+    "16": "assets/bookmark.png",
+    "48": "assets/bookmark.png",
+    "128": "assets/bookmark.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://web.whatsapp.com/*"],
+      "js": ["content.js"]
+    }
+  ]
 }
