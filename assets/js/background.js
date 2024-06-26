@@ -1,9 +1,13 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (tab.url && tab.url.includes("web.whatsapp.com") && changeInfo.status === 'complete') {
-      chrome.scripting.executeScript({
-        target: { tabId: tabId },
-        files: ["assets/js/init.js"]
-      });
-    }
+chrome.action.onClicked.addListener((tab) => {
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["content.js"],
   });
-  
+
+  // Example: Send a predefined message when extension button is clicked
+  const predefinedMessage = "Hello from WhatsApp Message Sender!";
+  chrome.tabs.sendMessage(tab.id, {
+    action: "sendMessage",
+    message: predefinedMessage,
+  });
+});
