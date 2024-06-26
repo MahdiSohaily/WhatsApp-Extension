@@ -5,17 +5,17 @@
   "version": "1.0",
   "permissions": ["activeTab"],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": {
-      "16": "assets/bookmark.png",
-      "48": "assets/bookmark.png",
-      "128": "assets/bookmark.png"
+      "16": "assets/img/logo.jpg",
+      "48": "assets/img/logo.jpg",
+      "128": "assets/img/logo.jpg"
     }
   },
   "icons": {
-    "16": "assets/bookmark.png",
-    "48": "assets/bookmark.png",
-    "128": "assets/bookmark.png"
+    "16": "assets/img/logo.jpg",
+    "48": "assets/img/logo.jpg",
+    "128": "assets/img/logo.jpg"
   },
   "content_scripts": [
     {
