@@ -18,7 +18,9 @@ function sendMessage(message) {
 
 const cartable = document.getElementById("cartable");
 cartable.addEventListener("click", function () {
-  // Get all div elements with role="button" inside the header
-  const buttonDivs = document.querySelectorAll("header");
-  console.log(buttonDivs);
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      action: "get_Number",
+    });
+  });
 });
