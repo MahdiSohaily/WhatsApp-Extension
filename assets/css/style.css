@@ -123,3 +123,17 @@ select {
     font-family: Vazir, sans-serif !important;
     direction: rtl !important;
 }
+
+.msgBtn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
