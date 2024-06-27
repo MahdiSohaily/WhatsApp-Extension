@@ -1,18 +1,10 @@
-document.getElementById("message1").addEventListener("click", function () {
-  sendMessage("Hello!");
-});
+const messages = document.querySelectorAll(".msgBtn");
 
-document.getElementById("message2").addEventListener("click", function () {
-  sendMessage("How are you?");
-});
-
-document.getElementById("message3").addEventListener("click", function () {
-  sendMessage("See you later!");
-});
-
-document.getElementById("sendButton").addEventListener("click", function () {
-  var customMessage = document.getElementById("customMessage").value;
-  sendMessage(customMessage);
+messages.forEach(function (message) {
+  message.addEventListener("click", function () {
+    const text = message.getAttribute("data-text");
+    sendMessage(message.textContent);
+  });
 });
 
 function sendMessage(message) {

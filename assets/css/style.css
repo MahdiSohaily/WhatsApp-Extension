@@ -124,7 +124,7 @@ select {
     direction: rtl !important;
 }
 
-.msgBtn {
+.btn {
     border: none;
     color: white;
     padding: 5px 10px;
@@ -137,7 +137,7 @@ select {
     cursor: pointer;
 }
 
-.btnInfo {
+.msgBtn {
     background-color: #3a6dcd;
 }
 
@@ -145,4 +145,13 @@ select {
     display: inline-flex;
     align-items: center;
     background-color: seagreen;
+}
+
+#operations {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: gray;
+    padding: 5px 10px;
 }
