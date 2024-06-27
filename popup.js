@@ -15,3 +15,10 @@ function sendMessage(message) {
     });
   });
 }
+
+const cartable = document.getElementById("cartable");
+cartable.addEventListener("click", function () {
+  // Get all div elements with role="button" inside the header
+  const buttonDivs = document.querySelectorAll("header");
+  console.log(buttonDivs);
+});
