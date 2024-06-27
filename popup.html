@@ -10,18 +10,17 @@
 
 <body>
   <h1>پیام مدنظر خود را برای ارسال انتخاب کنید</h1>
-  <button id="message1">Hello!</button>
-  <button id="message2">How are you?</button>
-  <button id="message3">See you later!</button>
+  <button type="button" id="message1">Hello!</button>
+  <button type="button" id="message2">How are you?</button>
+  <button type="button" id="message3">See you later!</button>
 
-  <select id="customMessage">
+  <select title="select messages" id="customMessage" name="messages">
     <option value="">Custom Message</option>
     <option value="Custom message 1">Custom message 1</option>
     <option value="Custom message 2">Custom message 2</option>
-    <!-- Add more custom message options as needed -->
   </select>
 
-  <button id="sendButton">Send Message</button>
+  <button type="button" id="sendButton">Send Message</button>
 
   <script src="popup.js"></script>
 </body>
