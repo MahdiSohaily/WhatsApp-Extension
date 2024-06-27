@@ -1,36 +1,26 @@
 {
   "manifest_version": 3,
   "name": "افزونه واتساپ یدک شاپ",
-  "description": "این افزونه جهت ارسال پیام‌های از قبل تعریف شده برای سرعت بیشتر ارتباطات می‌باشد.",
+  "description": "این افزپنه جهت ارسال پیام های از قبل تعریف شده برای سرعت بیشتر ارتباطات می باشد.",
   "version": "1.0",
-  "permissions": [
-    "activeTab",
-    "tabs",
-    "scripting"
-  ],
-  "host_permissions": [
-    "*://web.whatsapp.com/*"
-  ],
-  "background": {
-    "service_worker": "assets/js/background.js"
-  },
+  "permissions": ["activeTab"],
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/img/logo.jpg",
-      "48": "assets/img/logo.jpg",
-      "128": "assets/img/logo.jpg"
+      "16": "assets/bookmark.png",
+      "48": "assets/bookmark.png",
+      "128": "assets/bookmark.png"
     }
   },
   "icons": {
-    "16": "assets/img/logo.jpg",
-    "48": "assets/img/logo.jpg",
-    "128": "assets/img/logo.jpg"
+    "16": "assets/bookmark.png",
+    "48": "assets/bookmark.png",
+    "128": "assets/bookmark.png"
   },
   "content_scripts": [
     {
       "matches": ["*://web.whatsapp.com/*"],
-      "js": ["assets/js/init.js"]
+      "js": ["content.js"]
     }
   ]
 }
