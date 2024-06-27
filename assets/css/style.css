@@ -125,7 +125,6 @@ select {
 }
 
 .msgBtn {
-    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 5px 10px;
@@ -136,4 +135,14 @@ select {
     font-size: 12px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.btnInfo {
+    background-color: #3a6dcd;
+}
+
+.btnSubmit {
+    display: inline-flex;
+    align-items: center;
+    background-color: seagreen;
 }
