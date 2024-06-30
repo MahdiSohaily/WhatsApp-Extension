@@ -61,7 +61,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       setTimeout(() => {
         const phoneNumber = getInfoNumber();
         if (phoneNumber) {
-          createIncompleteBill();
+          window.open(
+            `http://new.test/views/factor/createIncomplete.php?phone=${phoneNumber}`,
+            "_blank"
+          );
         }
       }, 1000);
     }
