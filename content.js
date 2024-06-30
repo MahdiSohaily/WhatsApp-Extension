@@ -48,6 +48,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       console.error("The second div element was not found.");
       sendResponse({ status: "Second div not found" });
     }
+  } else if (request.action === "create_bill") {
+    // Get all div elements with role="button" inside the header
+    const buttonDivs = document.querySelector("div#main");
+    const header = buttonDivs.querySelector("header");
+    // Select the second div inside the header
+    const secondDiv = header.querySelectorAll("div")[1];
+
+    // Click on the second div
+    if (secondDiv) {
+      secondDiv.click();
+      setTimeout(() => {
+        const phoneNumber = getInfoNumber();
+        if (phoneNumber) {
+          createIncompleteBill();
+        }
+      }, 1000);
+    }
   }
   return true; // Ensure the sendResponse can be used asynchronously
 });
@@ -116,4 +133,42 @@ function modifyPhoneNumber(phoneNumber) {
   phoneNumber = phoneNumber.replace(/\D+/g, "");
 
   return phoneNumber;
+}
+
+// Create new Incomplete date for modification or assigning new bill
+function createIncompleteBill(factor_id = null) {
+  const success_message = document.getElementById("success_message");
+  const factor_link = document.getElementById("factor_link");
+  const params = new URLSearchParams();
+  params.append("create_incomplete_bill", "create_incomplete_bill");
+  params.append("date", moment().locale("fa").format("YYYY/MM/DD"));
+  params.append("factor_id", factor_id);
+
+  fetch("http://new.test/app/api/factor/IncompleteFactorApi.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      bootStrap();
+      success_message.classList.remove("opacity-0");
+      success_message.classList.add("opacity-1");
+      factor_link.href = "./incomplete.php?factor_number=" + data;
+
+      setTimeout(() => {
+        success_message.classList.remove("opacity-1");
+        success_message.classList.add("opacity-0");
+      }, 5000);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
