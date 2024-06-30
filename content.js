@@ -36,14 +36,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (secondDiv) {
       secondDiv.click();
       setTimeout(() => {
-        getInfoNumber();
+        const phoneNumber = getInfoNumber();
+        if (phoneNumber) {
+          window.open(
+            `http://new.test/views/callcenter/main.php?phone=${phoneNumber}`,
+            "_blank"
+          );
+        }
       }, 1000);
     } else {
       console.error("The second div element was not found.");
+      sendResponse({ status: "Second div not found" });
     }
-
-    // Send the result back
-    sendResponse({ buttons: "buttonDivsArray" });
   }
   return true; // Ensure the sendResponse can be used asynchronously
 });
@@ -73,25 +77,35 @@ function getInfoNumber() {
       const directChildDivsArray = Array.from(directChild).filter(
         (div) => div.parentElement === section
       );
+      try {
+        // Select the 5th direct child div (index 4)
+        const firstDiv = directChildDivsArray[0];
+        const directChildren = firstDiv.querySelectorAll("div");
 
-      // Select the 5th direct child div (index 4)
-      const firstDiv = directChildDivsArray[0];
-      const directChildren = firstDiv.querySelectorAll("div");
+        // Filter out direct child div elements
+        const ChildDivsArray = Array.from(directChildren).filter(
+          (div) => div.parentElement === firstDiv
+        );
 
-      // Filter out direct child div elements
-      const ChildDivsArray = Array.from(directChildren).filter(
-        (div) => div.parentElement === firstDiv
-      );
+        const secondDiv = directChildDivsArray[0];
+        const phoneNumber =
+          secondDiv.children[1].children[1].querySelector(
+            "div span span span"
+          ).innerText;
 
-      const secondDiv = directChildDivsArray[0];
-      const phoneNumber =
-        secondDiv.children[1].children[1].querySelector(
-          "div span span span"
-        ).innerText;
+        return modifyPhoneNumber(phoneNumber);
+      } catch (error) {
+        // Select the 5th direct child div (index 4)
+        const firstDiv = directChildDivsArray[6];
+        const phoneContainer = firstDiv.children[2];
+        const phoneNumber =
+          phoneContainer.querySelector("div div span span").innerText;
 
-      console.log(modifyPhoneNumber(phoneNumber));
+        return modifyPhoneNumber(phoneNumber);
+      }
     }
   }
+  return null;
 }
 
 function modifyPhoneNumber(phoneNumber) {
