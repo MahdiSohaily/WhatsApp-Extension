@@ -25,7 +25,27 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ status: "Input field not found" });
     }
   } else if (request.action === "get_number") {
-    console.log("hello");
+    // Changed this to match the sent action
+    let phoneNumberElement = document.querySelector(
+      'div[data-testid="user-profile-phone-number"]'
+    );
+
+    if (!phoneNumberElement) {
+      const allDivs = document.querySelectorAll("div");
+      allDivs.forEach((div) => {
+        if (div.textContent.match(/\+?\d{1,3}\s?\d{2,3}\s?\d{3}\s?\d{4}/)) {
+          phoneNumberElement = div;
+        }
+      });
+    }
+
+    if (phoneNumberElement) {
+      const phoneNumber = phoneNumberElement.textContent;
+      console.log("Phone number:", phoneNumber);
+      chrome.runtime.sendMessage({ phoneNumber: phoneNumber });
+    } else {
+      console.log("Phone number element not found.");
+    }
   }
   return true; // Ensure the sendResponse can be used asynchronously
 });
