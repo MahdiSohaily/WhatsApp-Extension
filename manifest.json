@@ -3,7 +3,7 @@
   "name": "افزونه واتساپ یدک شاپ",
   "description": "این افزپنه جهت ارسال پیام های از قبل تعریف شده برای سرعت بیشتر ارتباطات می باشد.",
   "version": "1.0",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "tabs"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -16,6 +16,9 @@
     "16": "assets/bookmark.png",
     "48": "assets/bookmark.png",
     "128": "assets/bookmark.png"
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

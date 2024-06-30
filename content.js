@@ -11,15 +11,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       input.dispatchEvent(
         new InputEvent("input", { bubbles: true, cancelable: true })
       );
-
-      var sendButton = document.querySelector('button[data-tab="11"]');
-      if (sendButton) {
-        sendButton.click();
-        sendResponse({ status: "Message sent" });
-      } else {
-        console.error("Send button not found");
-        sendResponse({ status: "Send button not found" });
-      }
+      setTimeout(() => {
+        var sendButton = document.querySelector('button[data-tab="11"]');
+        if (sendButton) {
+          sendButton.click();
+          sendResponse({ status: "Message sent" });
+        } else {
+          console.error("Send button not found");
+          sendResponse({ status: "Send button not found" });
+        }
+      }, 1000);
     } else {
       console.error("Input field not found");
       sendResponse({ status: "Input field not found" });
@@ -34,7 +35,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Click on the second div
     if (secondDiv) {
       secondDiv.click();
-      getInfoNumber();
+      setTimeout(() => {
+        getInfoNumber();
+      }, 1000);
     } else {
       console.error("The second div element was not found.");
     }
@@ -50,7 +53,6 @@ function getInfoNumber() {
   const header = document.querySelector('div[tabindex="-1"]');
 
   if (header) {
-    // Select all div elements that are direct children of header
     const directChildDivs = header.querySelectorAll("div");
 
     // Filter out direct child div elements
@@ -62,7 +64,6 @@ function getInfoNumber() {
     const fifthDiv = directChildDivsArray[4];
 
     if (fifthDiv) {
-      console.log(fifthDiv);
       let section = fifthDiv.querySelector(
         "span > div > span > div > div > section"
       );
@@ -75,16 +76,30 @@ function getInfoNumber() {
 
       // Select the 5th direct child div (index 4)
       const firstDiv = directChildDivsArray[0];
+      const directChildren = firstDiv.querySelectorAll("div");
 
-      console.log(firstDiv.querySelector("span.selectable-text").innerHTML);
-
-      // Assuming `sendResponse` is a function to send data back
-    } else {
-      console.error(
-        "The 5th direct child div element inside the header was not found."
+      // Filter out direct child div elements
+      const ChildDivsArray = Array.from(directChildren).filter(
+        (div) => div.parentElement === firstDiv
       );
+
+      const secondDiv = directChildDivsArray[0];
+      const phoneNumber =
+        secondDiv.children[1].children[1].querySelector(
+          "div span span span"
+        ).innerText;
+
+      console.log(modifyPhoneNumber(phoneNumber));
     }
-  } else {
-    console.error("Header element with tabindex='-1' was not found.");
   }
+}
+
+function modifyPhoneNumber(phoneNumber) {
+  const parts = phoneNumber.split(" ");
+  parts[0] = 0;
+  phoneNumber = parts.join("");
+  // Remove all whitespace
+  phoneNumber = phoneNumber.replace(/\D+/g, "");
+
+  return phoneNumber;
 }
