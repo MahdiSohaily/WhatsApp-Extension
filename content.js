@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const phoneNumber = getInfoNumber();
         if (phoneNumber) {
           window.open(
-            `http://new.test/views/callcenter/main.php?phone=${phoneNumber}`,
+            `http://192.168.9.14/YadakShop-APP/views/callcenter/main.php?phone=${phoneNumber}`,
             "_blank"
           );
         }
@@ -62,7 +62,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const phoneNumber = getInfoNumber();
         if (phoneNumber) {
           window.open(
-            `http://new.test/views/factor/createIncomplete.php?phone=${phoneNumber}`,
+            `http://192.168.9.14/YadakShop-APP/views/factor/createIncomplete.php?phone=${phoneNumber}`,
             "_blank"
           );
         }
@@ -138,40 +138,3 @@ function modifyPhoneNumber(phoneNumber) {
   return phoneNumber;
 }
 
-// Create new Incomplete date for modification or assigning new bill
-function createIncompleteBill(factor_id = null) {
-  const success_message = document.getElementById("success_message");
-  const factor_link = document.getElementById("factor_link");
-  const params = new URLSearchParams();
-  params.append("create_incomplete_bill", "create_incomplete_bill");
-  params.append("date", moment().locale("fa").format("YYYY/MM/DD"));
-  params.append("factor_id", factor_id);
-
-  fetch("http://new.test/app/api/factor/IncompleteFactorApi.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: params.toString(),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      bootStrap();
-      success_message.classList.remove("opacity-0");
-      success_message.classList.add("opacity-1");
-      factor_link.href = "./incomplete.php?factor_number=" + data;
-
-      setTimeout(() => {
-        success_message.classList.remove("opacity-1");
-        success_message.classList.add("opacity-0");
-      }, 5000);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
