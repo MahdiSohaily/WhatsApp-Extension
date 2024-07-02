@@ -147,3 +147,16 @@ function modifyPhoneNumber(phoneNumber) {
 
   return phoneNumber;
 }
+
+function getHeader() {
+  const header = document.querySelector('div[tabindex="-1"] header');
+  return header;
+}
+
+setTimeout(() => {
+  let header = getHeader();
+  if (!header) {
+    header = getHeader();
+  }
+  console.log(header.children[1]);
+}, 10000);
