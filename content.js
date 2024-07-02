@@ -1,3 +1,14 @@
+const messages = [
+  `قربان خودشون نیستن که بخوام تخفیف بگیرم شرمندتون شدیم`,
+  `قربان کم تر نمیشه متاسفانه شرمندتون شدیم`,
+  `چشم بررسی بشه اطلاع میدم`,
+  `سلام صبح بخیر`,
+  `سلام روز بخیر`,
+  `خدمت شما لطفا بررسی کنید`,
+  `لطفا تایید کنید`,
+  `قربان توی سیستم فقط خرده مشابه هست`,
+  `مشابه هست قربان`,
+];
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "send_message") {
     sendMessage(request.message, sendResponse);
