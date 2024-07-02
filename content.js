@@ -158,5 +158,20 @@ setTimeout(() => {
   if (!header) {
     header = getHeader();
   }
-  console.log(header.children[1]);
-}, 10000);
+  appendButton(header);
+}, 5000);
+
+function appendButton(header) {
+  const button = document.createElement("div");
+  button.id = "create-bill";
+  button.className = "btn btn-primary";
+  button.style.marginLeft = "10px";
+  button.innerHTML = `<div class="tooltip">
+                          <button id="create-bill" class="btn btn-primary" style="margin-left: 2px;">ایجاد فاکتور</button>
+                          <div class="tooltip_content">
+                            <span class="tooltiptext">ایجاد فاکتور</span>
+                          </div>
+                      </div>`; // Setting the button text
+
+  header.appendChild(button);
+}
