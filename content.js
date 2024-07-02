@@ -115,13 +115,23 @@ function getInfoNumber() {
 
         return modifyPhoneNumber(phoneNumber);
       } catch (error) {
-        // Select the 5th direct child div (index 4)
-        const firstDiv = directChildDivsArray[6];
-        const phoneContainer = firstDiv.children[2];
-        const phoneNumber =
-          phoneContainer.querySelector("div div span span").innerText;
+        try {
+          // Select the 5th direct child div (index 4)
+          const firstDiv = directChildDivsArray[6];
+          const phoneContainer = firstDiv.children[2];
+          const phoneNumber =
+            phoneContainer.querySelector("div div span span").innerText;
 
-        return modifyPhoneNumber(phoneNumber);
+          return modifyPhoneNumber(phoneNumber);
+        } catch (error) {
+          // Select the 5th direct child div (index 4)
+          const firstDiv = directChildDivsArray[7];
+          const phoneContainer = firstDiv.children[2];
+          const phoneNumber =
+            phoneContainer.querySelector("div div span span").innerText;
+
+          return modifyPhoneNumber(phoneNumber);
+        }
       }
     }
   }
@@ -137,4 +147,3 @@ function modifyPhoneNumber(phoneNumber) {
 
   return phoneNumber;
 }
-
