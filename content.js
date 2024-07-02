@@ -174,22 +174,6 @@ setTimeout(() => {
 }, 5000);
 
 function appendButton(header) {
-  const container = document.createElement("div");
-  container.id = "customContainer";
-  container.style.marginLeft = "10px";
-
-  const content = document.createElement("div");
-  content.innerHTML = `<div style="background-color:white; direction:rtl !important;">
-                        <section>
-                          <button class="customBtn msgBtn" type="button" data-text="سلام" id="message1">سلام</button>
-                          <button class="customBtn msgBtn" type="button" data-text="حال شما چطور است؟" id="message2">حال شما چطور است؟</button>
-                          <button class="customBtn msgBtn" type="button" data-text="خدانگهدار" id="message3">خدانگهدار</button>
-                        </section>
-                        <section id="operations">
-                          <button class="customBtn btnSubmit" type="button" id="cartable">کارتابل</button>
-                          <button class="customBtn btnSubmit" type="button" id="factor">فاکتور</button>
-                        </section>
-                      </div>`;
   const style = document.createElement("style");
   style.innerHTML = `
           .customBtn {
