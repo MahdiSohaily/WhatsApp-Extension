@@ -217,35 +217,71 @@ function appendButton(header) {
           }`;
   document.head.appendChild(style);
 
-  header.insertAdjacentHTML(
-    "beforeend",
-    `<div style="background-color:white; direction:rtl !important; z-index:100000000000000 !important">
-                        <section>
-                          <button class="customBtn msgBtn" type="button" data-text="سلام" id="message1">سلام</button>
-                          <button class="customBtn msgBtn" type="button" data-text="حال شما چطور است؟" id="message2">حال شما چطور است؟</button>
-                          <button class="customBtn msgBtn" type="button" data-text="خدانگهدار" id="message3">خدانگهدار</button>
-                        </section>
-                        <section id="operations">
-                          <button class="customBtn btnSubmit" type="button" id="cartable">کارتابل</button>
-                          <button class="customBtn btnSubmit" type="button" id="factor">فاکتور</button>
-                        </section>
-                      </div>`
-  );
+  // Create an empty container for the buttons
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.style.backgroundColor = "white";
+  buttonsContainer.style.direction = "rtl";
+  buttonsContainer.style.zIndex = "100000000000000";
 
-  // Attach event listeners to the buttons
-  document.getElementById("message1").addEventListener("click", () => {
-    sendMessage("سلام", (response) => console.log(response));
+  // Iterate over messages array to create buttons
+  messages.forEach((message, index) => {
+    const button = document.createElement("button");
+    button.classList.add("customBtn", "msgBtn");
+    button.setAttribute("type", "button");
+    button.setAttribute("data-text", message);
+    button.textContent = message;
+    button.id = `message${index + 1}`; // Assuming you want IDs like message1, message2, etc.
+
+    // Add click event listener to send the message
+    button.addEventListener("click", () => {
+      sendMessage(message, (response) => console.log(response));
+    });
+
+    // Append button to the container
+    buttonsContainer.appendChild(button);
   });
-  document.getElementById("message2").addEventListener("click", () => {
-    sendMessage("حال شما چطور است؟", (response) => console.log(response));
-  });
-  document.getElementById("message3").addEventListener("click", () => {
-    sendMessage("خدانگهدار", (response) => console.log(response));
-  });
-  document.getElementById("cartable").addEventListener("click", () => {
+
+  // Create the operations section with cartable and factor buttons
+  const operationsSection = document.createElement("section");
+  operationsSection.id = "operations";
+
+  const cartableButton = document.createElement("button");
+  cartableButton.classList.add("customBtn", "btnSubmit");
+  cartableButton.setAttribute("type", "button");
+  cartableButton.setAttribute("id", "cartable");
+  cartableButton.textContent = "کارتابل";
+  cartableButton.addEventListener("click", () => {
     handleGetNumber((response) => console.log(response));
   });
-  document.getElementById("factor").addEventListener("click", () => {
+  operationsSection.appendChild(cartableButton);
+
+  const factorButton = document.createElement("button");
+  factorButton.classList.add("customBtn", "btnSubmit");
+  factorButton.setAttribute("type", "button");
+  factorButton.setAttribute("id", "factor");
+  factorButton.textContent = "فاکتور";
+  factorButton.addEventListener("click", () => {
     handleCreateBill((response) => console.log(response));
   });
+  buttonsContainer.appendChild(cartableButton);
+  buttonsContainer.appendChild(factorButton);
+
+  // Append buttons container and operations section to header
+  header.appendChild(buttonsContainer);
+  // // Attach event listeners to the buttons
+  // document.getElementById("message1").addEventListener("click", () => {
+  //   sendMessage("", (response) => console.log(response));
+  // });
+  // document.getElementById("message2").addEventListener("click", () => {
+  //   sendMessage("", (response) => console.log(response));
+  // });
+  // document.getElementById("message3").addEventListener("click", () => {
+  //   sendMessage("", (response) => console.log(response));
+  // });
+  // document.getElementById("cartable").addEventListener("click", () => {
+  //   handleGetNumber((response) => console.log(response));
+  // });
+  // document.getElementById("factor").addEventListener("click", () => {
+  //   handleCreateBill((response) => console.log(response));
+  // });
 }
