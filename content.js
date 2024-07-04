@@ -18,6 +18,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     handleCreateBill(sendResponse);
   } else if (request.action === "addToChat") {
     let chatList = getChatList();
+    console.log(chatList);
     if (!chatList) {
       chatList = getChatList();
     }
@@ -171,20 +172,20 @@ function getChatList() {
   return chatList;
 }
 
-setTimeout(() => {
-  let chatList = getChatList();
-  if (!chatList) {
-    chatList = getChatList();
-  }
-  chatList.forEach((chat) =>
-    chat.addEventListener("click", () => {
-      setTimeout(() => {
-        const main = document.getElementById("main");
-        appendButton(main);
-      }, 500);
-    })
-  );
-}, 5000);
+// setTimeout(() => {
+//   let chatList = getChatList();
+//   if (!chatList) {
+//     chatList = getChatList();
+//   }
+//   chatList.forEach((chat) =>
+//     chat.addEventListener("click", () => {
+//       setTimeout(() => {
+//         const main = document.getElementById("main");
+//         appendButton(main);
+//       }, 500);
+//     })
+//   );
+// }, 5000);
 
 function appendButton(header) {
   const style = document.createElement("style");
