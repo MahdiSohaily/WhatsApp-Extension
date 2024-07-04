@@ -16,6 +16,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     handleGetNumber(sendResponse);
   } else if (request.action === "create_bill") {
     handleCreateBill(sendResponse);
+  } else if (request.action === "addToChat") {
+    let chatList = getChatList();
+    if (!chatList) {
+      chatList = getChatList();
+    }
+    chatList.forEach((chat) =>
+      chat.addEventListener("click", () => {
+        setTimeout(() => {
+          const main = document.getElementById("main");
+          appendButton(main);
+        }, 500);
+      })
+    );
   }
   return true; // Indicates we will send a response asynchronously
 });
