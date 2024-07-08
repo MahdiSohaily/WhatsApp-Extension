@@ -160,21 +160,6 @@ function getChatList() {
   return chatList;
 }
 
-// setTimeout(() => {
-//   let chatList = getChatList();
-//   if (!chatList) {
-//     chatList = getChatList();
-//   }
-//   chatList.forEach((chat) =>
-//     chat.addEventListener("click", () => {
-//       setTimeout(() => {
-//         const main = document.getElementById("main");
-//         appendButton(main);
-//       }, 500);
-//     })
-//   );
-// }, 5000);
-
 function handleChatListClick() {
   let chatList = getChatList();
   if (!chatList) {
@@ -218,8 +203,13 @@ function appendButton(header) {
           }`;
   document.head.appendChild(style);
 
+  if (header.querySelector("#buttonsContainer")) {
+    return false;
+  }
+
   // Create an empty container for the buttons
   const buttonsContainer = document.createElement("div");
+  buttonsContainer.id = "buttonsContainer";
   buttonsContainer.style.backgroundColor = "white";
   buttonsContainer.style.direction = "rtl";
   buttonsContainer.style.zIndex = "100000000000000";
@@ -264,25 +254,9 @@ function appendButton(header) {
   factorButton.addEventListener("click", () => {
     handleCreateBill((response) => console.log(response));
   });
-  buttonsContainer.appendChild(cartableButton);
-  buttonsContainer.appendChild(factorButton);
+  operationsSection.appendChild(factorButton);
 
   // Append buttons container and operations section to header
+  buttonsContainer.appendChild(operationsSection);
   header.appendChild(buttonsContainer);
-  // // Attach event listeners to the buttons
-  // document.getElementById("message1").addEventListener("click", () => {
-  //   sendMessage("", (response) => console.log(response));
-  // });
-  // document.getElementById("message2").addEventListener("click", () => {
-  //   sendMessage("", (response) => console.log(response));
-  // });
-  // document.getElementById("message3").addEventListener("click", () => {
-  //   sendMessage("", (response) => console.log(response));
-  // });
-  // document.getElementById("cartable").addEventListener("click", () => {
-  //   handleGetNumber((response) => console.log(response));
-  // });
-  // document.getElementById("factor").addEventListener("click", () => {
-  //   handleCreateBill((response) => console.log(response));
-  // });
 }
